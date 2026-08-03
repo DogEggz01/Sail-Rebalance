@@ -9,7 +9,7 @@ Junk: Start at 90°, Peak at 150°, reduce slighty until 180°
 
 Gaff: Start at 80°, Peak at 120°, reduce back to original modifier at 160°
 
-Also add Apparent wind speed check for Junk sail, if apparent wind speed is more than 30 knots, the base modifier increase to 85%.
+Also add a strong wind check for Junk sail, if ture wind speed is more than 21 knots, the base modifier increase to 85%.
 
 At Peak angle it remain 100%, so when you are experience stronger wind, the apparent wind angle affect less, but overall junk still perform better under strong wind.
 
