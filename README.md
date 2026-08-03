@@ -13,11 +13,13 @@ Also add a strong wind check for Junk sail, if ture wind speed is more than 21 k
 
 At Peak angle it remain 100%, so when you are experience stronger wind, the apparent wind angle affect less, but overall junk still perform better under strong wind.
 
-All above and be disable. Junk and Gaff power curve can be disable seperately.
+
+If you don't like power curve apporach. This mod also provide option for changing power modifier numbers while keeping the vanilla mechanics.
+
+Junk and Gaff power curve can be disable seperately.
 
 After disable power curve. You can use slider in Configuration menu to change the power modifier directly. Range 50% to 100%.
 
-This will make it behave like vanilla game, just use different power modifier.
 
 
 Use Kakam as example, stock sailplan, only mainsail up. Changing from default 75% modifier to 100% modifier will result around 1-2 knots speed increase, depend on wind angle and wind speed.
