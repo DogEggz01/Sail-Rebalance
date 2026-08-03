@@ -18,3 +18,8 @@ All above and be disable. Junk and Gaff power curve can be disable seperately.
 After disable power curve. You can use slider in Configuration menu to change the power modifier directly. Range 50% to 100%.
 
 This will make it behave like vanilla game, just use different power modifier.
+
+
+Use Kakam as example, stock sailplan, only mainsail up. Changing from default 75% modifier to 100% modifier will result around 1-2 knots speed increase, depend on wind angle and wind speed.
+
+But the power transfer to boat will be stronger also(heeling, torque force from unbalance sailplan), please keep this in mind.
