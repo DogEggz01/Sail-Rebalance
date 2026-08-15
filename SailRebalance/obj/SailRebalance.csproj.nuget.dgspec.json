@@ -5,12 +5,12 @@
   },
   "projects": {
     "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Sailwind\\ModSource\\SailRebalance\\SailRebalance.csproj": {
-      "version": "1.1.10",
+      "version": "1.1.11",
       "restore": {
         "projectUniqueName": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Sailwind\\ModSource\\SailRebalance\\SailRebalance.csproj",
         "projectName": "SailRebalance",
         "projectPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Sailwind\\ModSource\\SailRebalance\\SailRebalance.csproj",
-        "packagesPath": "C:\\Users\\pro1p\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\pro1p\\.nuget\\packages",
         "outputPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Sailwind\\ModSource\\SailRebalance\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
@@ -42,7 +42,7 @@
           ]
         },
         "restoreAuditProperties": {
-          "enableAudit": "true",
+          "enableAudit": "false",
           "auditLevel": "low",
           "auditMode": "direct"
         },

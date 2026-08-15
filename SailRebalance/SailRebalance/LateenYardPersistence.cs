@@ -1,85 +1,121 @@
 using System;
 using System.Collections.Generic;
+using HarmonyLib;
 
 namespace SailRebalance;
 
 internal static class LateenYardPersistence
 {
-	private const string ModDataKey = "com.pro1p.sailwind.junkandgaffadjustment.lateen-yard-sides.v1";
+    private const string ModDataKey =
+        Plugin.PluginGuid + ".lateen-yard-sides.v1";
 
-	private static readonly Dictionary<string, int> LoadedSides = new Dictionary<string, int>();
+    private static readonly Dictionary<string, int> LoadedSides =
+        new Dictionary<string, int>();
 
-	private static bool loaded;
+    private static bool loaded;
 
-	internal static void BeginLoad()
-	{
-		LoadedSides.Clear();
-		loaded = false;
-	}
+    internal static void BeginLoad()
+    {
+        LoadedSides.Clear();
+        loaded = false;
+    }
 
-	internal static void Save()
-	{
-		if (GameState.modData == null)
-		{
-			GameState.modData = new Dictionary<string, string>();
-		}
-		List<string> list = new List<string>();
-		foreach (LateenYardRig lateenYardRig in LateenControlRegistry.ActiveRigs)
-		{
-			if (!(lateenYardRig == null))
-			{
-				string persistenceKey = lateenYardRig.GetPersistenceKey();
-				if (!string.IsNullOrEmpty(persistenceKey))
-				{
-					list.Add(persistenceKey + "," + lateenYardRig.YardSideSign);
-				}
-			}
-		}
-		GameState.modData["com.pro1p.sailwind.junkandgaffadjustment.lateen-yard-sides.v1"] = string.Join("|", list.ToArray());
-	}
+    internal static void Save()
+    {
+        if (GameState.modData == null)
+            GameState.modData = new Dictionary<string, string>();
 
-	internal static void Load()
-	{
-		LoadedSides.Clear();
-		loaded = true;
-		if (GameState.modData == null || !GameState.modData.TryGetValue("com.pro1p.sailwind.junkandgaffadjustment.lateen-yard-sides.v1", out var text) || string.IsNullOrEmpty(text))
-		{
-			return;
-		}
-		string[] array = text.Split(new char[1] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-		for (int i = 0; i < array.Length; i++)
-		{
-			int num = array[i].LastIndexOf(',');
-			if (num > 0 && num < array[i].Length - 1)
-			{
-				string text2 = array[i].Substring(0, num);
-				if (int.TryParse(array[i].Substring(num + 1), out var num2))
-				{
-					LoadedSides[text2] = ((num2 >= 0) ? 1 : (-1));
-				}
-			}
-		}
-		foreach (LateenYardRig activeRig in LateenControlRegistry.ActiveRigs)
-		{
-			ApplyLoadedSide(activeRig);
-		}
-	}
+        var entries = new List<string>();
 
-	internal static void ApplyLoadedSide(LateenYardRig rig)
-	{
-		if (loaded && !(rig == null))
-		{
-			string persistenceKey = rig.GetPersistenceKey();
-			if (!string.IsNullOrEmpty(persistenceKey) && LoadedSides.TryGetValue(persistenceKey, out var savedSide))
-			{
-				rig.RestoreYardSide(savedSide);
-			}
-		}
-	}
+        foreach (LateenYardRig rig in LateenControlRegistry.ActiveRigs)
+        {
+            if (rig == null)
+                continue;
 
-	internal static void Reset()
-	{
-		LoadedSides.Clear();
-		loaded = false;
-	}
+            string persistenceKey = rig.GetPersistenceKey();
+            if (!string.IsNullOrEmpty(persistenceKey))
+                entries.Add(persistenceKey + "," + rig.YardSideSign);
+        }
+
+        GameState.modData[ModDataKey] = string.Join("|", entries.ToArray());
+    }
+
+    internal static void Load()
+    {
+        LoadedSides.Clear();
+        loaded = true;
+
+        if (GameState.modData == null ||
+            !GameState.modData.TryGetValue(ModDataKey, out string data) ||
+            string.IsNullOrEmpty(data))
+        {
+            return;
+        }
+
+        string[] entries = data.Split(
+            new[] { '|' },
+            StringSplitOptions.RemoveEmptyEntries);
+
+        for (int i = 0; i < entries.Length; i++)
+        {
+            int separator = entries[i].LastIndexOf(',');
+            if (separator <= 0 || separator >= entries[i].Length - 1)
+                continue;
+
+            string key = entries[i].Substring(0, separator);
+            string sideText = entries[i].Substring(separator + 1);
+
+            if (int.TryParse(sideText, out int side))
+                LoadedSides[key] = side >= 0 ? 1 : -1;
+        }
+
+        foreach (LateenYardRig rig in LateenControlRegistry.ActiveRigs)
+            ApplyLoadedSide(rig);
+    }
+
+    internal static void ApplyLoadedSide(LateenYardRig rig)
+    {
+        if (!loaded || rig == null)
+            return;
+
+        string persistenceKey = rig.GetPersistenceKey();
+        if (!string.IsNullOrEmpty(persistenceKey) &&
+            LoadedSides.TryGetValue(persistenceKey, out int savedSide))
+        {
+            rig.RestoreYardSide(savedSide);
+        }
+    }
+
+    internal static void Reset()
+    {
+        LoadedSides.Clear();
+        loaded = false;
+    }
+}
+
+[HarmonyPatch(typeof(SaveLoadManager), nameof(SaveLoadManager.LoadGame))]
+internal static class LateenYardBeginLoadPatch
+{
+    private static void Prefix()
+    {
+        LateenYardPersistence.BeginLoad();
+    }
+}
+
+[HarmonyPatch(typeof(SaveLoadManager), nameof(SaveLoadManager.SaveModData))]
+internal static class LateenYardSavePatch
+{
+    private static void Postfix()
+    {
+        LateenYardPersistence.Save();
+    }
+}
+
+[HarmonyPatch(typeof(SaveLoadManager), nameof(SaveLoadManager.LoadModData))]
+internal static class LateenYardLoadPatch
+{
+    private static void Postfix()
+    {
+        LateenYardPersistence.Load();
+    }
 }

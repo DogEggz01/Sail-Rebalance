@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "SailRebalance/1.1.10": {
+      "SailRebalance/1.1.11": {
         "runtime": {
           "SailRebalance.dll": {}
         }
@@ -15,7 +15,7 @@
     }
   },
   "libraries": {
-    "SailRebalance/1.1.10": {
+    "SailRebalance/1.1.11": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

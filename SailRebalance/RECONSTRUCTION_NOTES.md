@@ -1,8 +1,9 @@
-# Sail Rebalance v1.1.10 reconstruction
+# Sail Rebalance v1.1.11 source
 
-This source tree was reconstructed from the installed `SailRebalance.dll`
-version 1.1.10 using its matching portable PDB. The installed binary is the
-behavioral authority for this baseline.
+This source tree is version 1.1.11. It was reconstructed from the installed
+`SailRebalance.dll` version 1.1.10 using its matching portable PDB, then cleaned
+and restructured. The installed v1.1.10 binary remains the behavioral authority
+for the original baseline.
 
 Reference copies of the original DLL and PDB are stored in `ReferenceBinary`.
 Normal builds do not overwrite the installed plugin. To install a deliberate
@@ -13,9 +14,8 @@ dotnet build --configuration Release -p:InstallAfterBuild=true
 ```
 
 Because this is decompiled source, comments and some original expression-level
-style cannot be recovered. Type names, members, constants, control flow,
-Harmony targets, plugin metadata, and runtime calls are reconstructed from the
-compiled assembly.
+style cannot be recovered. The reference binary remains available when exact
+v1.1.10 behavior or assembly structure needs to be checked.
 
 Authoritative v1.1.10 DLL SHA-256:
 
@@ -23,13 +23,29 @@ Authoritative v1.1.10 DLL SHA-256:
 0A272DF4F6E5AFC94AFA536EFA420DA07B3048DD5F1C24FD06E4A584F05D317D
 ```
 
-Validation performed during reconstruction:
+The reconstructed source was subsequently cleaned for readability:
+
+- `LateenYardRig` is now a partial class split into core state/control,
+  yard motion and geometry, and rope visuals.
+- Related control patches, registry types, persistence patches, and force
+  patches are grouped by responsibility.
+- Decompiled temporary names and repeated numeric literals were replaced with
+  descriptive names and constants. Angle conversion uses `Mathf.Rad2Deg`.
+- The empty `LateenLowerBraceController.UpdateSailAttachment` override and the
+  redundant `RopeControllerSailReef.Update` guard were removed. The
+  `GPButtonRopeWinch.Update` patch remains responsible for blocking mouse,
+  controller, keyboard rotation, and quick release on locked winches.
+
+Validation performed after the readability cleanup:
 
 - Release build completed with zero warnings and zero errors.
-- Rebuilt and original assemblies have the same assembly/plugin version,
-  plugin GUID, type count, method count, field count, constants, and Harmony
-  targets.
-- Re-decompiling the rebuilt DLL produced the same reconstructed source as the
-  reference DLL except for an immaterial explicit `this.` qualifier.
+- The rebuilt assembly and plugin metadata report version 1.1.11. The plugin
+  name and GUID remain compatible with the v1.1.10 baseline.
+- The expected Harmony targets remain, except for the deliberately removed
+  `RopeControllerSailReef.Update` guard. The two independent `Sail.ApplyForce`
+  responsibilities are now represented by separate patch classes targeting
+  the same vanilla method.
+- Normal validation builds leave the installed v1.1.10 DLL unchanged.
+- This cleanup has not yet been exercised in a running game session.
 - The rebuilt DLL is not expected to be byte-identical because recompilation
-  regenerates assembly/debug metadata.
+  regenerates assembly/debug metadata and the source structure has changed.

@@ -2,15 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>14.0</LangVersion>
+    <LangVersion>latest</LangVersion>
     <AssemblyName>SailRebalance</AssemblyName>
     <RootNamespace>SailRebalance</RootNamespace>
-    <Version>1.1.10</Version>
+    <Version>1.1.11</Version>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Nullable>disable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <Deterministic>true</Deterministic>
     <GameDir>$(MSBuildThisFileDirectory)..\..\</GameDir>
     <PluginDir>$(GameDir)BepInEx\plugins\SailRebalance</PluginDir>
