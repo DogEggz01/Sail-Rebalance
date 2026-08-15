@@ -1,0 +1,8 @@
+C:\Program Files (x86)\Steam\steamapps\common\Sailwind\ModSource\SailRebalance\obj\Release\netstandard2.0\SailRebalance.csproj.AssemblyReference.cache
+C:\Program Files (x86)\Steam\steamapps\common\Sailwind\ModSource\SailRebalance\obj\Release\netstandard2.0\SailRebalance.GeneratedMSBuildEditorConfig.editorconfig
+C:\Program Files (x86)\Steam\steamapps\common\Sailwind\ModSource\SailRebalance\obj\Release\netstandard2.0\SailRebalance.csproj.CoreCompileInputs.cache
+C:\Program Files (x86)\Steam\steamapps\common\Sailwind\ModSource\SailRebalance\bin\Release\netstandard2.0\SailRebalance.deps.json
+C:\Program Files (x86)\Steam\steamapps\common\Sailwind\ModSource\SailRebalance\bin\Release\netstandard2.0\SailRebalance.dll
+C:\Program Files (x86)\Steam\steamapps\common\Sailwind\ModSource\SailRebalance\bin\Release\netstandard2.0\SailRebalance.pdb
+C:\Program Files (x86)\Steam\steamapps\common\Sailwind\ModSource\SailRebalance\obj\Release\netstandard2.0\SailRebalance.dll
+C:\Program Files (x86)\Steam\steamapps\common\Sailwind\ModSource\SailRebalance\obj\Release\netstandard2.0\SailRebalance.pdb
