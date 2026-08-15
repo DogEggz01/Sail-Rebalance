@@ -1,27 +1,33 @@
-# JunkandGaffAdjustment
+# Sail Reblance
+*Disclaimer: This mod is made with ChatGPT 5.6 Sol.*
+
 Junk and Gaff sail have 75% and 85% power modifier built in, means they are less powerfull than other sail.
 
-This mod change this. Instead of fixed modifier, now Junk and Gaff have power curve that peak at differnt apparent wind angle.
+Now Junk and Gaff have power curve that peak at certain apparent wind angle.
 
-All curve start at base modifiler (Junk 75%, Gaff 85%), reach 100% at peak angle (means it perform same as other sail), and reduce again after peak angle.
+At peak angle, Junk and Gaff will perform same as other sail given same sail area.
 
-Junk: Start at 90°, Peak at 150°, reduce slighty until 180° 
+Junk also received a strong wind bonus, if ture wind speed is more than 21 knots, the base modifier increase to 85%.
 
-Gaff: Start at 80°, Peak at 120°, reduce back to original modifier at 160°
-
-Also add a strong wind check for Junk sail, if ture wind speed is more than 21 knots, the base modifier increase to 85%.
-
-At Peak angle it remain 100%, so when you are experience stronger wind, the apparent wind angle affect less, but overall junk still perform better under strong wind.
-
-
-If you don't like power curve apporach. This mod also provide option for changing power modifier numbers while keeping the vanilla mechanics.
+## Junk Curve ##
+- **Modifier changes**: 0.75 at 90 degrees, 1.00 at 150 degrees, and 0.85 at 180 degrees.
+- **Modifer under strong wind**: 0.85 at 90 degrees, 1.00 at 150 degrees, and 0.90 at 180 degrees.
+- Below 90 degree remain unchanged compare to vanilla.
+## Gaff Curve ##
+- **Modifier changes**: 0.85 at 80 degrees, 1.00 at 120 degrees, and 0.85 at 160 degrees.
+- Below 80 degree and above 160 degree remain unchanged compare to vanilla.
 
 Junk and Gaff power curve can be disable seperately.
-
 After disable power curve. You can use slider in Configuration menu to change the power modifier directly. Range 50% to 100%.
 
-
-
-Use Kakam as example, stock sailplan, only mainsail up. Changing from default 75% modifier to 100% modifier will result around 1-2 knots speed increase, depend on wind angle and wind speed.
-
-But the power transfer to boat will be stronger also(heeling, torque force from unbalance sailplan), please keep this in mind.
+## Lateen change ##
+- Bad tack will now receive 90% power modifier
+- Add Lower brace winch for dipping maneuver of lateen yard.
+- After tacking the yard to other side, penelty will be lifted.
+- Dipping procedure:
+  - Fully furl your sail and loose the sheet
+  - Pull in Lower brace winch till yard tack to other side of mast. You cannot interact with Lower brace winch before halyard fully pulled in and sheet winch fully let out.
+  - Release the lower brace till yard resume normal position. You cannot interact with Halyard and Sheet winch before yard return to normal position.
+  - Set sail!
+- After pulling Lower brace all the way in to tack the yard,  Lower brace winch need to be released at least 30% before pulling in to be able to tack the yard again.
+  - This is to prevent accidently tacking the yard again
