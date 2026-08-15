@@ -21,7 +21,7 @@ Junk and Gaff power curve can be disable seperately.
 After disable power curve. You can use slider in Configuration menu to change the power modifier directly. Range 50% to 100%.
 
 ## Lateen change ##
-- Bad tack will now receive 90% power modifier
+- Bad tack will now receive 90% power modifier. (Could be toggle off)
 - Add Lower brace winch for dipping maneuver of lateen yard.
 - After tacking the yard to other side, penelty will be lifted.
 - Dipping procedure:
