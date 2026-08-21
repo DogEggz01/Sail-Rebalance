@@ -22,7 +22,7 @@ After disable power curve. You can use slider in Configuration menu to change th
 ## Lateen change ##
 - Bad tack will now receive 90% power modifier. (Could be toggle off)
 - Add Lower brace winch for dipping maneuver of lateen yard.
-- After tacking the yard to other side, penelty will be lifted.
+- After tacking the yard to good tack side, penelty will be lifted.
 - Dipping procedure:
   - Fully furl your sail and loose the sheet
   - Pull in Brace winch till yard tack to other side of mast. You cannot interact with Brace winch before halyard fully pulled in and sheet winch fully let out.
