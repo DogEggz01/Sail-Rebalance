@@ -30,3 +30,11 @@ After disable power curve. You can use slider in Configuration menu to change th
   - Set sail!
 - After pulling Lower brace all the way in to tack the yard,  Brace winch need to be released at least 30% before pulling in to be able to tack the yard again.
   - This is to prevent accidently tacking the yard again
+- Current brace winch priority list(where will brace winch be)
+  - Free reef winch on the owning mast: slot (1) -> (2) -> (3) -> other slots.
+  - Free staysail/jib reef winch.
+  - Free staysail/jib angle winch associated with the owning mast.
+  - Owning mast angle winch at the sail’s mast slot: left -> right -> mid.
+  - Free staysail/jib angle winch associated with other masts: foremast -> main mast -> mizzen mast.
+  - Free bowsprit reef winch.
+  - If none are available, no brace winch is assigned.
