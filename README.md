@@ -25,10 +25,10 @@ After disable power curve. You can use slider in Configuration menu to change th
 - After tacking the yard to good tack side, penelty will be lifted.
 - Dipping procedure:
   - Fully furl your sail and loose the sheet
-  - Pull in Brace winch till yard tack to other side of mast. You cannot interact with Brace winch before halyard fully pulled in and sheet winch fully let out.
-  - Release the Brace winch till yard resume normal position. You cannot interact with Halyard and Sheet winch before yard return to normal position.
+  - Release Brace winch till yard tack to other side of mast. You cannot interact with Brace winch before halyard fully pulled in and sheet winch fully let out.
+  - Pull in the Brace winch till yard resume normal position. You cannot interact with Halyard and Sheet winch before yard return to normal position.
   - Set sail!
-- After pulling Lower brace all the way in to tack the yard,  Brace winch need to be released at least 30% before pulling in to be able to tack the yard again.
+- After Release the brace all the way in to tack the yard,  Brace winch need to be pulled in least 30% before releasing to be able to tack the yard again.
   - This is to prevent accidently tacking the yard again
 - Current brace winch priority list(where will brace winch be)
   - Free reef winch on the owning mast: slot (1) -> (2) -> (3) -> other slots.
