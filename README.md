@@ -16,6 +16,10 @@ After disable power curve. You can use slider in Configuration menu to change th
 - **Modifier changes**: 0.75 at 90 degrees, 1.00 at 150 degrees, and 0.85 at 180 degrees.
 - **Modifer under strong wind**: 0.85 at 90 degrees, 1.00 at 150 degrees, and 0.90 at 180 degrees.
 - Below 90 degree remain unchanged compare to vanilla.
+## Junk Square Change ##
+- Junk Sqaure is now pulling up to unfurl, behavior more like junk sail
+- This is only visual change, it still act as square mechanically. But do make it easier to reef and harder to unfurl.
+- Could be toggle on/off. Effect take place right away.
 ## Gaff Curve ##
 - **Modifier changes**: 0.85 at 80 degrees, 1.00 at 120 degrees, and 0.85 at 160 degrees.
 - Below 80 degree and above 160 degree remain unchanged compare to vanilla.
