@@ -19,6 +19,8 @@ namespace SailRebalance
 
 		internal static ConfigEntry<bool> EnableLateenBadTackPenalty { get; private set; }
 
+		internal static ConfigEntry<bool> ReverseJunkSquareFurling { get; private set; }
+
 		internal static ManualLogSource Log { get; private set; }
 
 		internal static bool JunkCurveEnabled
@@ -74,6 +76,15 @@ namespace SailRebalance
 			}
 		}
 
+		internal static bool ReverseJunkSquareFurlingEnabled
+		{
+			get
+			{
+				ConfigEntry<bool> reverseJunkSquareFurling = Plugin.ReverseJunkSquareFurling;
+				return reverseJunkSquareFurling == null || reverseJunkSquareFurling.Value;
+			}
+		}
+
 		private void Awake()
 		{
 			Plugin.Log = base.Logger;
@@ -83,13 +94,36 @@ namespace SailRebalance
 			Plugin.EnableGaffCurve = base.Config.Bind<bool>("Gaff sails", "Enable gaff curve", true, "Use the gaff apparent-wind curve. When enabled, the gaff multiplier slider is ignored.");
 			Plugin.GaffMultiplier = base.Config.Bind<float>("Gaff sails", "Gaff multiplier", SailPower.GaffDefault, new ConfigDescription("Replaces the original 0.85 multiplier when the gaff curve is disabled.", acceptableValues, Array.Empty<object>()));
 			Plugin.EnableLateenBadTackPenalty = base.Config.Bind<bool>("Lateen sails", "Enable bad tack penalty", true, "Reduce lateen sail force by 10% when the yard is on the windward side of the mast.");
+			Plugin.ReverseJunkSquareFurling = base.Config.Bind<bool>("Junk square sails", "Reverse furling", true, "Pulling the reef winch raises and unfurls the sail; releasing it lowers and furls the sail.");
+			Plugin.ReverseJunkSquareFurling.SettingChanged += this.OnReverseJunkSquareFurlingChanged;
 			this.harmony = new Harmony(PluginGuid);
 			this.harmony.PatchAll(typeof(Plugin).Assembly);
+			this.reverseJunkSquareRefreshPending = true;
 			base.Logger.LogInfo(PluginName + " " + PluginVersion + " loaded.");
+		}
+
+		private void Update()
+		{
+			if (!this.reverseJunkSquareRefreshPending)
+			{
+				return;
+			}
+			this.reverseJunkSquareRefreshPending = false;
+			JunkSquareReverseReefing.SetEnabled(Plugin.ReverseJunkSquareFurlingEnabled);
+		}
+
+		private void OnReverseJunkSquareFurlingChanged(object sender, EventArgs eventArgs)
+		{
+			this.reverseJunkSquareRefreshPending = true;
 		}
 
 		private void OnDestroy()
 		{
+			if (Plugin.ReverseJunkSquareFurling != null)
+			{
+				Plugin.ReverseJunkSquareFurling.SettingChanged -= this.OnReverseJunkSquareFurlingChanged;
+			}
+			JunkSquareReverseReefing.Reset();
 			LateenBraceAttachmentPatch.Reset();
 			LateenControlRegistry.DisposeAllRigs();
 			LateenYardPersistence.Reset();
@@ -105,8 +139,10 @@ namespace SailRebalance
 
 		public const string PluginName = "Sail Rebalance";
 
-		public const string PluginVersion = "1.1.16";
+		public const string PluginVersion = "1.2.0";
 
 		private Harmony harmony;
+
+		private volatile bool reverseJunkSquareRefreshPending;
 	}
 }
