@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
@@ -6,7 +6,7 @@ using HarmonyLib;
 
 namespace SailRebalance
 {
-	[BepInPlugin(PluginGuid, PluginName, PluginVersion)]
+	[BepInPlugin(Plugin.PluginGuid, Plugin.PluginName, Plugin.PluginVersion)]
 	public sealed class Plugin : BaseUnityPlugin
 	{
 		internal static ConfigEntry<bool> EnableJunkCurve { get; private set; }
@@ -96,10 +96,10 @@ namespace SailRebalance
 			Plugin.EnableLateenBadTackPenalty = base.Config.Bind<bool>("Lateen sails", "Enable bad tack penalty", true, "Reduce lateen sail force by 10% when the yard is on the windward side of the mast.");
 			Plugin.ReverseJunkSquareFurling = base.Config.Bind<bool>("Junk square sails", "Reverse furling", true, "Pulling the reef winch raises and unfurls the sail; releasing it lowers and furls the sail.");
 			Plugin.ReverseJunkSquareFurling.SettingChanged += this.OnReverseJunkSquareFurlingChanged;
-			this.harmony = new Harmony(PluginGuid);
+			this.harmony = new Harmony(Plugin.PluginGuid);
 			this.harmony.PatchAll(typeof(Plugin).Assembly);
 			this.reverseJunkSquareRefreshPending = true;
-			base.Logger.LogInfo(PluginName + " " + PluginVersion + " loaded.");
+			base.Logger.LogInfo(Plugin.PluginName + " " + Plugin.PluginVersion + " loaded.");
 		}
 
 		private void Update()
@@ -139,7 +139,7 @@ namespace SailRebalance
 
 		public const string PluginName = "Sail Rebalance";
 
-		public const string PluginVersion = "1.2.0";
+		public const string PluginVersion = "1.2.1";
 
 		private Harmony harmony;
 
